@@ -1,40 +1,78 @@
 # Machine-Learning-Based-Pairing-Algorithm
-**Project Overview:** 
-This project, developed during the Dandyhacks Hackathon, implements an AI matching system to connect freshmen with upperclassmen based on student profiles. Our team won a prize from Fidelity Investments for this innovative solution.
+## 🎯 Project Overview
 
-**Files:**
-ml_analysis_for_matching.py: Main script for data analysis and mentor-mentee matching
-student_profiles.csv: Input data containing student information (generated in DataBricks Cloud Platform)
-mentor_matches.csv: Output file with mentor-mentee matches based on NLP techniques
+An innovative AI matching system developed during the Dandyhacks Hackathon that connects freshmen with upperclassmen based on their profiles. This solution earned recognition from Fidelity Investments for its innovative approach to student mentorship.
 
-**Methodology:**
-The matching algorithm uses Natural Language Processing techniques, specifically TF-IDF (Term Frequency-Inverse Document Frequency) and Cosine Similarity, to pair mentees with mentors based on their majors and interests.
+## 🏆 Key Features
 
-**Key Features:**
-Data cleaning and preprocessing
-TF-IDF vectorization for majors and interests
-Cosine similarity calculation for matching
-Weighted combination of major and interest similarities
-Generation of mentor-mentee pairs with similarity scores
+- Intelligent data preprocessing and cleaning pipeline
+- Advanced TF-IDF vectorization for academic profiles
+- Sophisticated cosine similarity matching algorithm
+- Smart weighting system for major and interest matching
+- Automated generation of optimal mentor-mentee pairs
 
-**Visualizations:**
-The script generates several visualizations to aid in understanding the matching results:
-similarity_heatmap.png: Heatmap showing similarity scores between mentees and mentors
-top_10_matches.png: Bar plot of the top 10 mentor-mentee matches based on similarity scores
-similarity_scatter.png: Scatter plot comparing major similarity vs. interest similarity
-mentor_majors_pie.png: Pie chart showing the distribution of mentor majors
-matching_network.png: Network graph visualizing mentor-mentee connections
+## 📁 Project Structure
 
-**Usage:**
-Ensure you have the required libraries installed (pandas, numpy, matplotlib, seaborn, scikit-learn, networkx)
-Place the student_profiles.csv file in the same directory as the script
-Run the ml_analysis_for_matching.py script
-Review the output in the console and the generated CSV and PNG files
+```
+project/
+├── ml_analysis_for_matching.py    # Main matching algorithm
+├── student_profiles.csv           # Input data (DataBricks generated)
+└── mentor_matches.csv            # Output matching results
+```
 
-**Results:**
-The script outputs mentor-mentee matches sorted by similarity score, which are saved in the mentor_matches.csv file. Additionally, various visualizations are generated to provide insights into the matching process and results.
+## 🔬 Methodology
 
-**Future Improvements:**
-Implement more advanced NLP techniques for better matching
-Add user interface for easier interaction with the matching system
-Incorporate feedback mechanism to improve matching over time
+The matching system employs Natural Language Processing techniques:
+
+- TF-IDF (Term Frequency-Inverse Document Frequency) analysis
+- Cosine Similarity calculations
+- Weighted profile matching
+
+## 📊 Visualizations
+
+The system generates comprehensive visual analytics:
+
+- Similarity Heatmap (similarity_heatmap.png)
+- Top 10 Matches Bar Plot (top_10_matches.png)
+- Similarity Scatter Plot (similarity_scatter.png)
+- Mentor Major Distribution (mentor_majors_pie.png)
+- Matching Network Graph (matching_network.png)
+
+## ⚙️ Dependencies
+
+```
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+networkx
+```
+
+## 🚀 Getting Started
+
+1. Install required dependencies:
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn networkx
+```
+
+1. Set up the project:
+- Place student_profiles.csv in the project directory
+- Run the main script: python ml_analysis_for_matching.py
+- Check generated visualizations and mentor_matches.csv
+
+## 📈 Results
+
+The algorithm produces:
+
+- Ranked mentor-mentee matches with similarity scores
+- Detailed visualization suite for match analysis
+- Comprehensive matching statistics
+
+## 🔮 Future Enhancements
+
+- Implementation of advanced NLP algorithms
+- Development of user-friendly interface
+- Integration of feedback-based learning system
+- Real-time matching capabilities
