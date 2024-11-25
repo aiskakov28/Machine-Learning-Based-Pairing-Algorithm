@@ -72,7 +72,7 @@ The algorithm produces:
 
 ## 🔮 Future Enhancements
 
-- Implementation of advanced NLP algorithms
+- Implementation of more advanced NLP algorithms
 - Development of user-friendly interface
 - Integration of feedback-based learning system
 - Real-time matching capabilities
