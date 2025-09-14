@@ -1,0 +1,86 @@
+version: "3.9"
+services:
+  redpanda:
+    image: docker.redpanda.com/redpanda/redpanda:v23.2.12
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --node-id=0
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://redpanda:9092
+    ports: ["9092:9092"]
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports: ["9200:9200"]
+
+  cassandra:
+    image: cassandra:4.1
+    environment:
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=128M
+    ports: ["9042:9042"]
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/docker/api.Dockerfile
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+      CASSANDRA_HOSTS: cassandra
+      CASSANDRA_KEYSPACE: mentor
+      CASSANDRA_TABLE: profiles
+      CSV_PATH: /workspace/data/raw/student_profiles.csv
+      MENTEE_YEAR: 2028
+    volumes:
+      - .:/workspace
+    depends_on: [redpanda, cassandra]
+    ports: ["8000:8000"]
+
+  producer_csv:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: sh -c "pip install kafka-python && python services/ingest/producers/csv_replay.py"
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+      KAFKA_TOPIC: profiles
+      CSV_PATH: /workspace/data/raw/student_profiles.csv
+      SPEED_DELAY_SEC: "0.02"
+    volumes:
+      - .:/workspace
+    depends_on: [redpanda]
+
+  consumer_es:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: sh -c "pip install kafka-python elasticsearch && python services/ingest/consumers/es_indexer.py"
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+      KAFKA_TOPIC: profiles
+      ELASTIC_URL: http://elasticsearch:9200
+      ELASTIC_INDEX: profiles
+    volumes:
+      - .:/workspace
+    depends_on: [redpanda, elasticsearch]
+
+  consumer_cassandra:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: sh -c "pip install kafka-python cassandra-driver && python services/ingest/consumers/cassandra_sink.py"
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+      KAFKA_TOPIC: profiles
+      CASSANDRA_HOSTS: cassandra
+      CASSANDRA_KEYSPACE: mentor
+      CASSANDRA_TABLE: profiles
+    volumes:
+      - .:/workspace
+    depends_on: [redpanda, cassandra]

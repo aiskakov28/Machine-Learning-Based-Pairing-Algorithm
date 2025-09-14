@@ -1,0 +1,14 @@
+{
+  "settings": { "number_of_shards": 1, "number_of_replicas": 0 },
+  "mappings": {
+    "properties": {
+      "full_name": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
+      "major": { "type": "keyword" },
+      "class_year": { "type": "integer" },
+      "academic_interests": { "type": "text", "analyzer": "english" },
+      "hobbies": { "type": "text", "analyzer": "english" },
+      "role": { "type": "keyword" },
+      "created_at": { "type": "date" }
+    }
+  }
+}

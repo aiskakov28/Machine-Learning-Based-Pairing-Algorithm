@@ -1,0 +1,10 @@
+{
+  "name": "@aiskakov/mentor-sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": "./index.js",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "jest -c jest.config.js --passWithNoTests" },
+  "devDependencies": { "jest": "^29.7.0" }
+}
