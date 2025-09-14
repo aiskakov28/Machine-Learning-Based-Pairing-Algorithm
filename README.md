@@ -41,9 +41,9 @@ Streaming ingestion → real-time indexing → TF-IDF similarity → search & ra
 
 ```mermaid
 flowchart TD
-  A[CSV / HTTP] -->|producer| B[Kafka (Redpanda)]
-  B --> C[Cassandra sink (ground truth)]
-  B --> D[Elasticsearch indexer (fast search &amp; ranking)]
+  A[CSV or HTTP] -->|producer| B[Kafka / Redpanda]
+  B --> C[Cassandra sink - ground truth]
+  B --> D[Elasticsearch indexer - fast search & ranking]
   C --> E[FastAPI]
   D --> E
   E -->|/api/search & /api/matches| F[Next.js Dashboard]
