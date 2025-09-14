@@ -1,7 +1,7 @@
 # 🤝 AI Mentor Matching Platform
 
-Smarter mentor–mentee pairing from profile text.  
-Streaming ingestion → real-time indexing → TF-IDF similarity → search & ranked matches — with a clean web UI and SDKs.
+Smarter mentor-mentee pairing from profile text.  
+Streaming ingestion → real-time indexing → TF-IDF similarity → search & ranked matches: with a clean web UI and SDKs.
 
 ---
 
@@ -43,9 +43,10 @@ Streaming ingestion → real-time indexing → TF-IDF similarity → search & ra
 flowchart TD
   A[CSV / HTTP] -->|producer| B[Kafka (Redpanda)]
   B --> C[Cassandra sink (ground truth)]
-  B --> D[Elasticsearch indexer (fast search / ranking)]
-  C & D --> E[FastAPI]
-  E -->|/api/search<br>/api/matches| F[Next.js Dashboard]
+  B --> D[Elasticsearch indexer (fast search &amp; ranking)]
+  C --> E[FastAPI]
+  D --> E
+  E -->|/api/search & /api/matches| F[Next.js Dashboard]
 ```
 
 ---
